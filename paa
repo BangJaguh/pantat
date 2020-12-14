@@ -1,0 +1,26 @@
+# install webserver
+apt-get -y install nginx libexpat1-dev libxml-parser-perl
+
+# install essential package
+apt-get -y install nano iptables-persistent dnsutils screen whois ngrep unzip unrar
+
+# install webserver
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ara-rangers/vps/master/nginx.conf"
+mkdir -p /home/vps/public_html
+echo "<pre>SETUP BY ARA PM +601126996292</pre>" > /home/vps/public_html/index.html
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ara-rangers/vps/master/vps.conf"
+sed -i 's/listen = \/var\/run\/php7.0-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/7.0/fpm/pool.d/www.conf
+useradd -m vps;
+mkdir -p /home/vps/public_html
+echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
+chown -R www-data:www-data /home/vps/public_html
+chmod -R g+rw /home/vps/public_html
+cd /home/vps/public_html
+wget -O /home/vps/public_html/uptime.php "http://autoscript.kepalatupai.com/uptime.php1"
+wget -O /home/vps/public_html/index.html "https://gakod.com/debian/indexx.html"
+service php7.0-fpm start
+service nginx restart
+cd
