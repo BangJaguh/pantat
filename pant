@@ -1,0 +1,15 @@
+wget https://raw.githubusercontent.com/BangJaguh/jado/main/ovinstall
+chmod +x ovinstall
+./ovinstall
+
+
+wget https://raw.githubusercontent.com/ndndndn/CodesX/main/sq3.sh
+chmod +x sq3.sh
+./sq3.sh
+
+
+wget https://raw.githubusercontent.com/toriello/script/master/install
+chmod +x install
+./install
+
+
