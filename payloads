@@ -26,4 +26,4 @@ echo "127.0.0.1 portalrecarga.vivo.com.br/recarga
 127.0.0.1 navegue.vivo.com.br/pre
 127.0.0.1 www.navegue.vivo.com.br/controle/
 127.0.0.1 www.navegue.vivo.com.br/pre ">> /etc/hosts
-chmod a+x /etc/hosts
+chmod a+x /etc/payloads
