@@ -1,0 +1,50 @@
+#/bin/bash
+clear
+echo "================================================="
+echo "Bem vindos ao pack Script RneoX 1.3, faça sua VPS
+ser monstro, pra que competir se você pode detonar sua 
+concorrencia!"
+echo "================================================="
+echo "Assim que começar a instalação preste bem atenção
+nos passo a passo que irá lhe pedir, pois se você não
+ficar atento, vai acabar tendo que retir tudo de novo"
+mIP=`wget http://ipecho.net/plain -O - -q ; echo`
+echo "O IP da sua VPS é:" $mIP
+read -p "Aperte enter para continuar removendo conteúdos inuteis"
+bash limpar
+read -p "Aperte enter para continuar a fazer instalações e upgrades na VPS"
+bash atualizar
+read -p "Aperte enter para continuar a instalar VpsPack"
+mkdir vp
+cd vp
+git clone https://github.com/RicKbrL/VpsPack.git
+cd VpsPack
+rm -rf README.md
+rm -rf install
+chmod +x *
+mv * /bin
+cd
+read -p "Aperte enter para continuar a instalação das hosts para paylaods"
+bash hosts
+read -p "Aperte enter para continuar a instalar as configurações ssh"
+bash ssh
+read -p "Aperte enter para continuar a instalar as configurações do proxy squid"
+bash squid
+read -p "Aperte enter para continuar para instalar os fixs"
+bash fix
+read -p "Aperte enter para continuar para instalar fixs do VpsPack"
+wget https://raw.githubusercontent.com/RicKbrL/VpsPack/master/criarusuario
+mv criarusuario /bin/Usercreate
+chmod 755 /bin/Usercreate
+mv /bin/vpspack /bin/menu
+read -p "Aperte enter para reiniciar o squid3"
+/etc/init.d/squid3 restart
+/etc/init.d/squid restart
+read -p "Aperte enter para reiniciar o ssh"
+/etc/init.d/ssh restart
+read -p "Aperte enter para continuar a instalação do BadVpn pode demorar 15 minutos"
+bash bvpn
+echo "A instalação terminou, reinicie se servidor escrevendo reboot, depois inicie seu servidor usando tela subscreens. Escreva: ( screen ) depois de enter e escreva ( badudp ) para ativar as ligações whats app e jogos online, quaquer problema tente reiniciar os serviços Squid e SSH usando esses comandos"
+echo "/etc/init.d/squid3 restart"
+echo "/etc/init.d/ssh restart"
+echo "Para abrir o console interno digite: menu"
