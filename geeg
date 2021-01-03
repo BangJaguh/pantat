@@ -1,0 +1,59 @@
+#!/bin/bash
+if [ "$(id -u)" -ne 0 ]; then
+	echo -ne "\nPlease execute this script as root.\n"
+	exit 1; fi
+if [ ! -f /etc/debian* ]; then
+	echo -ne "\nFor Debian distro only.\n"
+	exit 1; fi
+export DEBIAN_FRONTEND=noninteractive
+
+apt install -y openvpn
+dirx=/etc/openvpn
+mkdir $dirx/log
+wget https://raw.githubusercontent.com/BangJaguh/pantat/main/openvpn.tar.gz -qO- | tar xz -C $dirx
+IP=`wget -qO- ipv4.icanhazip.com`
+cat > /root/client.ovpn << config
+client
+dev tun
+dev-type tun
+remote $IP 443
+http-proxy $IP 8080
+http-proxy-retry
+nobind
+persist-tun
+cipher AES-256-CBC
+auth SHA256
+verb 2
+mute 3
+push-peer-info
+ping 10
+ping-restart 60
+hand-window 70
+server-poll-timeout 4
+reneg-sec 2592000
+sndbuf 100000
+rcvbuf 100000
+remote-cert-tls server
+comp-lzo no
+auth-user-pass
+key-direction 1
+
+<ca>
+`cat $dirx/keys/ca.crt`
+</ca>
+<cert>
+`cat $dirx/keys/server.crt`
+</cert>
+<key>
+`cat $dirx/keys/server.key`
+</key>
+<tls-auth>
+`cat $dirx/keys/tls-auth.key`
+</tls-auth>
+config
+
+systemctl restart openvpn
+
+echo -e "\nOpenVPN installed."
+echo "Script by Dexter Cellona Banawon"
+exit 0
