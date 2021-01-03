@@ -101,7 +101,7 @@ END
 			/etc/init.d/squid3 restart
 			/etc/init.d/openvpn restart
 			/etc/init.d/nginx restart
-		fi
+		
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
@@ -143,10 +143,7 @@ END
 		/etc/init.d/squid restart
 		/etc/init.d/openvpn restart
 		/etc/init.d/nginx restart
-	fi
-
-fi
-
+	
 
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
