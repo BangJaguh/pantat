@@ -112,8 +112,8 @@ cd /etc/openvpn/easy-rsa/
 	./easyrsa --batch sign-req server server
 	cp pki/issued/server.crt /etc/openvpn/
 	./easyrsa gen-dh
-        openvpn --genkey --secret /etc/openvpn/easy-rsa/keys/ta.key
-        cp /etc/openvpn/easy-rsa/keys/ta.key /etc/openvpn/
+        openvpn --genkey --secret /etc/openvpn/ta.key
+        cp /etc/openvpn/ta.key /etc/openvpn/
         cp pki/dh.pem /etc/openvpn/	
 cd ~/openvpndeb/
 }
